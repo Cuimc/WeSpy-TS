@@ -1,10 +1,19 @@
 {
-  "name": "wespy",
-  "version": "0.2.0",
+  "name": "wespy-ts",
+  "version": "1.0.0",
   "description": "WeSpy - 文章抓取与 Markdown 转换工具 (TypeScript 版)",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "bin": {
     "wespy": "dist/cli/main.js"
   },
@@ -14,16 +23,28 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "wechat",
     "article",
     "scraper",
     "markdown",
-    "juejin"
+    "juejin",
+    "fetch",
+    "crawl"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cuimc/WeSpy-TS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Cuimc/WeSpy-TS/issues"
+  },
+  "homepage": "https://github.com/Cuimc/WeSpy-TS#readme",
+  "sideEffects": false,
   "engines": {
     "node": ">=18"
   },

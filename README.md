@@ -1,6 +1,9 @@
-# WeSpy (TypeScript)
+# wespy-ts
 
-文章抓取与 Markdown 转换工具 — TypeScript 版本。
+[![npm version](https://img.shields.io/npm/v/wespy-ts)](https://www.npmjs.com/package/wespy-ts)
+[![license](https://img.shields.io/npm/l/wespy-ts)](https://github.com/Cuimc/WeSpy-TS/blob/main/LICENSE)
+
+文章抓取与 Markdown 转换工具 — 支持微信公众号、掘金等平台。
 
 ## 支持平台
 
@@ -13,24 +16,35 @@
 ## 安装
 
 ```bash
-npm install
-npm run build
+# 全局安装（推荐，可直接使用 wespy 命令）
+npm install -g wespy-ts
+
+# 或作为项目依赖安装
+npm install wespy-ts
 ```
 
 ## CLI 使用
 
+全局安装后直接使用 `wespy` 命令：
+
 ```bash
 # 获取单篇文章（默认输出 Markdown）
-node dist/cli/main.js fetch-article https://mp.weixin.qq.com/s/xxxxx
+wespy fetch-article https://mp.weixin.qq.com/s/xxxxx
 
 # 指定输出格式和目录
-node/dist/cli/main.js fetch-article https://mp.weixin.qq.com/s/xxxxx -o ./output --all
+wespy fetch-article https://mp.weixin.qq.com/s/xxxxx -o ./output --all
 
 # 批量下载微信专辑
-node dist/cli/main.js fetch-album https://mp.weixin.qq.com/mp/appmsgalbum?... --max 5
+wespy fetch-album https://mp.weixin.qq.com/mp/appmsgalbum?... --max 5
 
 # 智能模式（自动判断 URL 类型）
-node dist/cli/main.js https://mp.weixin.qq.com/s/xxxxx -o ./output --html --json
+wespy https://mp.weixin.qq.com/s/xxxxx -o ./output --html --json
+```
+
+也可以通过 `npx` 直接运行，无需安装：
+
+```bash
+npx wespy-ts fetch-article https://mp.weixin.qq.com/s/xxxxx
 ```
 
 ### CLI 参数
@@ -48,7 +62,7 @@ node dist/cli/main.js https://mp.weixin.qq.com/s/xxxxx -o ./output --html --json
 ## SDK API
 
 ```typescript
-import { fetchArticle, fetchAlbum } from 'wespy'
+import { fetchArticle, fetchAlbum } from 'wespy-ts'
 
 // 获取单篇文章
 const result = await fetchArticle({
@@ -107,19 +121,23 @@ interface ArticleDraft {
 { ok: false, error: { code: string, message: string, retryable: boolean } }
 ```
 
-## 测试
-
-```bash
-npm test
-```
-
 ## 开发
 
 ```bash
-npm run dev    # watch 模式
-npm run lint   # 类型检查
+git clone git@github.com:Cuimc/WeSpy-TS.git
+cd WeSpy-TS
+npm install
+
+npm run build       # 编译 TypeScript
+npm run dev         # watch 模式
+npm test            # 运行测试
+npm run lint        # 类型检查
 ```
 
 ## Python 原版
 
 Python 原版代码保留在 `../WeSpy/` 目录中，未被删除。详见 [MIGRATION.md](./MIGRATION.md)。
+
+## License
+
+MIT

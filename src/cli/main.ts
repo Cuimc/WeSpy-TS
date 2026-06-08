@@ -5,6 +5,9 @@
  */
 
 import { createInterface } from 'node:readline'
+import { readFileSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { Command } from 'commander'
 import { fetchArticle } from '../sdk/fetch-article.js'
 import { fetchAlbum } from '../sdk/fetch-album.js'
@@ -12,7 +15,10 @@ import { fetchAlbumList } from '../sdk/fetch-album-list.js'
 import { isWechatAlbumUrl } from '../platforms/detector.js'
 import type { OutputFormat } from '../core/types.js'
 import { writeJsonSafe, ensureDir } from '../utils/fs.js'
-import { join } from 'node:path'
+
+// 从 package.json 读取版本号，避免硬编码
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const pkg = JSON.parse(readFileSync(join(__dirname, '../../package.json'), 'utf-8')) as { version: string }
 
 // ── 公共选项 ──────────────────────────────────────────────
 
@@ -217,7 +223,7 @@ const program = new Command()
 program
   .name('wespy')
   .description('文章抓取与 Markdown 转换工具')
-  .version('0.2.0')
+  .version(pkg.version)
 
 // ── fetch-article 子命令 ──────────────────────────────────
 
